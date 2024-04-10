@@ -1,7 +1,12 @@
-# Use the official httpd image as a parent image
 FROM httpd:latest
 
-# Copy the local index.html file to the directory where httpd serves files
-COPY index.html /usr/local/apache2/htdocs/
+# Install dependencies for PHP
+RUN apt-get update && \
+    apt-get install -y php libapache2-mod-php && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# The default httpd image exposes port 80, so no need to explicitly EXPOSE it
+# Copy the PHP script to the htdocs directory
+COPY index.php /usr/local/apache2/htdocs/
+
+EXPOSE 80
