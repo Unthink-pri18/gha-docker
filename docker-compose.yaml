@@ -4,3 +4,5 @@ services:
     image: 843407455682.dkr.ecr.ap-south-1.amazonaws.com/gha:latest
     ports:
       - "80:80"
+    environment:
+      - INSTANCE_PRIVATE_IP=${INSTANCE_PRIVATE_IP}
